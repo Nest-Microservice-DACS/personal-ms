@@ -1,0 +1,26 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PersonalEstado {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model Personal {
+  id        Int            @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String         @unique
+  phone     String
+  estado    PersonalEstado @default(ACTIVE)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
