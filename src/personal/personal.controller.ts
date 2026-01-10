@@ -8,27 +8,27 @@ import { UpdatePersonalDto } from './dto/update-personal.dto';
 export class PersonalController {
   constructor(private readonly personalService: PersonalService) {}
 
-  @MessagePattern('createPersonal')
+  @MessagePattern('create_personal')
   create(@Payload() createPersonalDto: CreatePersonalDto) {
     return this.personalService.create(createPersonalDto);
   }
 
-  @MessagePattern('findAllPersonal')
+  @MessagePattern('find_all_personal')
   findAll() {
     return this.personalService.findAll();
   }
 
-  @MessagePattern('findOnePersonal')
+  @MessagePattern('find_one_personal')
   findOne(@Payload() id: number) {
     return this.personalService.findOne(id);
   }
 
-  @MessagePattern('updatePersonal')
+  @MessagePattern('update_personal')
   update(@Payload() updatePersonalDto: UpdatePersonalDto) {
     return this.personalService.update(updatePersonalDto.id, updatePersonalDto);
   }
 
-  @MessagePattern('removePersonal')
+  @MessagePattern('remove_personal')
   remove(@Payload() id: number) {
     return this.personalService.remove(id);
   }
