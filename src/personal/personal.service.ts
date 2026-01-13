@@ -70,31 +70,24 @@ export class PersonalService
     return {
       data: await this.personal.findMany({
         skip,
-        take, where: { status: personalPaginationDto.status },
+        take,
+        where: { status: personalPaginationDto.status },
       }),
       meta: { total: totalPages, page, lastPage: Math.ceil(totalPages / size) },
     };
   }
 
   async findOne(id: number) {
-    try {
-      const personal = await this.personal.findUnique({
-        where: { id },
-      });
-      if (!personal) {
-        throw new RpcException({
-          message: 'Personal not found',
-          status: HttpStatus.NOT_FOUND,
-        });
-      }
-      return personal;
-    } catch (error) {
-      if (error instanceof RpcException) throw error;
+    const personal = await this.personal.findUnique({
+      where: { id },
+    });
+    if (!personal) {
       throw new RpcException({
-        message: 'Error fetching personal',
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Personal not found',
+        status: HttpStatus.NOT_FOUND,
       });
     }
+    return personal;
   }
 
   async update(id: number, updatePersonalDto: UpdatePersonalDto) {

@@ -16,12 +16,12 @@ export class PersonalController {
     return this.personalService.create(createPersonalDto);
   }
 
-  @MessagePattern({cmd: 'find_all_personal'})
+  @MessagePattern({cmd: 'get_personal'})
   findAll(@Payload() personalPaginationDto: PersonalPaginationDto) {
     return this.personalService.findAll(personalPaginationDto);
   }
 
-  @MessagePattern({cmd: 'find_one_personal'})
+  @MessagePattern({cmd: 'get_personal_by_id'})
   findOne(@Payload() id: number) {
     return this.personalService.findOne(id);
   }
