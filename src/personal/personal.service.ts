@@ -90,6 +90,19 @@ export class PersonalService
     return personal;
   }
 
+  async findByIds(ids: number[]) {
+    try {
+      return await this.personal.findMany({
+        where: { id: { in: ids } },
+      });
+    } catch (error) {
+      throw new RpcException({
+        message: 'Error fetching personals by ids',
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+
   async update(id: number, updatePersonalDto: UpdatePersonalDto) {
     try {
       const updated = await this.personal.update({

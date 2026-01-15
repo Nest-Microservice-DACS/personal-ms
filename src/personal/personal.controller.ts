@@ -26,6 +26,11 @@ export class PersonalController {
     return this.personalService.findOne(id);
   }
 
+  @MessagePattern({cmd: 'get_personal_by_ids'})
+  findByIds(@Payload() ids: number[]) {
+    return this.personalService.findByIds(ids);
+  }
+
   @MessagePattern({cmd: 'update_personal'})
   update(@Payload() updatePersonalDto: UpdatePersonalDto) {
     return this.personalService.update(updatePersonalDto.id, updatePersonalDto);
